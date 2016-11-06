@@ -1,0 +1,11 @@
+{
+  "name": "jm-utilities",
+  "version": "1.0.0",
+  "description": "JMUtilities",
+  "main": "app.js",
+  "author": {
+    "name": "JnRMnT",
+    "email": "ozankanik@hotmail.com"
+  },
+  "dependencies": {}
+}
