@@ -1,8 +1,9 @@
-var _ = require("lodash");
-module.exports.IsDefined = function (obj) {
-    return obj != null && obj != undefined;
+/// <reference path="Scripts/typings/index.d.ts" />
+var JM = require("./jmutilities");
+exports.isDefined = function (obj) {
+    return JM.isDefined(obj);
 };
-module.exports.IsEmpty = function (obj) {
-    return !module.exports.IsDefined(obj) || _.IsEmpty(obj);
+exports.isEmpty = function (obj) {
+    return JM.isEmpty(obj);
 };
 //# sourceMappingURL=app.js.map

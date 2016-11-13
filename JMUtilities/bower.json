@@ -1,0 +1,24 @@
+{
+  "name": "jm-utilities",
+  "description": "JMUtilities",
+  "main": "jmutilities.js",
+  "authors": [
+    "JnRMnT"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "utilities",
+    "utils",
+    "jm"
+  ],
+  "homepage": "https://github.com/JnRMnT/jm-utilities",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.0.0"
+}

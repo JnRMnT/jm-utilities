@@ -1,9 +1,10 @@
-﻿import _ = require("lodash");
+﻿/// <reference path="Scripts/typings/index.d.ts" />
+var JM = require("./jmutilities");
 
-module.exports.IsDefined = (obj: any): boolean => {
-    return obj != null && obj != undefined;
+exports.isDefined = (obj: any): boolean => {
+    return JM.isDefined(obj);
 };
 
-module.exports.IsEmpty = (obj: any): boolean => {
-    return !module.exports.IsDefined(obj) || _.IsEmpty(obj);
+exports.isEmpty = (obj: any): boolean => {
+    return JM.isEmpty(obj);
 }
