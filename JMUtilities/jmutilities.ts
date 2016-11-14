@@ -1,8 +1,6 @@
 ﻿/// <reference path="Scripts/typings/index.d.ts" />
-var _: _.LoDashStatic = window ? (<any>window)._ : undefined;
-if (!_) {
-    _ = require("lodash");
-}
+var isNode = typeof window === 'undefined';
+var _: _.LoDashStatic = isNode ? require("lodash") : (<any>window)._;
 
 class JM {
     public static isDefined = (obj: any): boolean=> {

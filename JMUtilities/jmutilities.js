@@ -1,8 +1,6 @@
 /// <reference path="Scripts/typings/index.d.ts" />
-var _ = window ? window._ : undefined;
-if (!_) {
-    _ = require("lodash");
-}
+var isNode = typeof window === 'undefined';
+var _ = isNode ? require("lodash") : window._;
 var JM = (function () {
     function JM() {
     }
