@@ -1,5 +1,5 @@
 ﻿/// <reference path="Scripts/typings/index.d.ts" />
-var JM = require("./jmutilities");
+require("jmutilities.js")();
 
 exports.isDefined = (obj: any): boolean => {
     return JM.isDefined(obj);

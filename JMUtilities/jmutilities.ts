@@ -1,10 +1,10 @@
 ﻿/// <reference path="Scripts/typings/index.d.ts" />
-var _: _.LoDashStatic = (<any>window)._;
+var _: _.LoDashStatic = window ? (<any>window)._ : undefined;
 if (!_) {
     _ = require("lodash");
 }
 
-export class JM {
+class JM {
     public static isDefined = (obj: any): boolean=> {
         return (obj != null && obj != undefined);
     };
@@ -14,5 +14,6 @@ export class JM {
 };
 
 if (module) {
+    module.exports.JM = JM;
     module.exports = JM;
 }
