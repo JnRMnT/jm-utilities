@@ -13,7 +13,7 @@ var JM = (function () {
     return JM;
 })();
 ;
-if (module) {
+if (isNode) {
     module.exports.JM = JM;
     module.exports = JM;
 }

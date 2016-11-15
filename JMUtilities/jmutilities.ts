@@ -11,7 +11,7 @@ class JM {
     };
 };
 
-if (module) {
+if (isNode) {
     module.exports.JM = JM;
     module.exports = JM;
 }
