@@ -41,4 +41,6 @@ class JM {
 if (isNode) {
     module.exports.JM = JM;
     module.exports = JM;
+} else {
+    (<any>window).JM = JM;
 }
