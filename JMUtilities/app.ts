@@ -8,3 +8,7 @@ exports.isDefined = (obj: any): boolean => {
 exports.isEmpty = (obj: any): boolean => {
     return JM.isEmpty(obj);
 }
+
+exports.waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any> => {
+    return JM.waitFor(conditionFunction, maxRetryCount, tryInterval);
+}

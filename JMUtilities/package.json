@@ -1,6 +1,6 @@
 {
   "name": "jm-utilities",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "JMUtilities",
   "main": "app.js",
   "author": {
@@ -12,9 +12,7 @@
     "url": "https://github.com/JnRMnT/jm-utilities.git"
   },
   "dependencies": {
-    "lodash": "4.16.6"
-  },
-  "devDependencies": {
-    "lodash": "4.16.6"
+    "lodash": "4.16.6",
+    "q": "^1.4.1"
   }
 }
