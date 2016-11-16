@@ -2,20 +2,20 @@
 var isNode = typeof window === 'undefined';
 var _ = isNode ? require("lodash") : window._;
 var q = isNode ? require("q") : window.Q;
-var JM = (function () {
-    function JM() {
+var _JM = (function () {
+    function _JM() {
     }
-    JM.isDefined = function (obj) {
+    _JM.isDefined = function (obj) {
         return (obj != null && obj != undefined);
     };
-    JM.isEmpty = function (obj) {
-        return !JM.isDefined(obj) || _.isEmpty(obj);
+    _JM.isEmpty = function (obj) {
+        return !_JM.isDefined(obj) || _.isEmpty(obj);
     };
-    JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
-        if (!JM.isDefined(maxRetryCount)) {
+    _JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
+        if (!_JM.isDefined(maxRetryCount)) {
             maxRetryCount = 5;
         }
-        if (!JM.isDefined(tryInterval)) {
+        if (!_JM.isDefined(tryInterval)) {
             tryInterval = 200;
         }
         var deferred = q.defer();
@@ -36,16 +36,17 @@ var JM = (function () {
                 }
             }
         };
+        retry();
         return deferred.promise;
     };
-    return JM;
+    return _JM;
 })();
 ;
 if (isNode) {
-    module.exports.JM = JM;
-    module.exports = JM;
+    module.exports.JM = _JM;
+    module.exports = _JM;
 }
 else {
-    window.JM = JM;
+    window.JM = _JM;
 }
 //# sourceMappingURL=jmutilities.js.map

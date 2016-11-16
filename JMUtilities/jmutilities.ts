@@ -3,19 +3,19 @@ var isNode = typeof window === 'undefined';
 var _: _.LoDashStatic = isNode ? require("lodash") : (<any>window)._;
 var q = isNode ? require("q") : (<any>window).Q;
 
-class JM {
+class _JM {
     public static isDefined = (obj: any): boolean=> {
         return (obj != null && obj != undefined);
     };
     public static isEmpty = (obj: any): boolean=> {
-        return !JM.isDefined(obj) || _.isEmpty(obj);
+        return !_JM.isDefined(obj) || _.isEmpty(obj);
     };
 
     public static waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any>=> {
-        if (!JM.isDefined(maxRetryCount)) {
+        if (!_JM.isDefined(maxRetryCount)) {
             maxRetryCount = 5;
         }
-        if (!JM.isDefined(tryInterval)) {
+        if (!_JM.isDefined(tryInterval)) {
             tryInterval = 200;
         }
         var deferred: Q.Deferred<any> = q.defer();
@@ -34,13 +34,15 @@ class JM {
                 }
             }
         };
+
+        retry();
         return deferred.promise;
     };
 };
 
 if (isNode) {
-    module.exports.JM = JM;
-    module.exports = JM;
+    module.exports.JM = _JM;
+    module.exports = _JM;
 } else {
-    (<any>window).JM = JM;
+    (<any>window).JM = _JM;
 }
