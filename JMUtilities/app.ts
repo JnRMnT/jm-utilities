@@ -1,13 +1,13 @@
 ﻿/// <reference path="Scripts/typings/index.d.ts" />
-require("./jmutilities.js");
+var jmUtils: JMUtilities = require("./jmutilities.js");
 exports.isDefined = (obj: any): boolean => {
-    return _JM.isDefined(obj);
+    return jmUtils.isDefined(obj);
 };
 
 exports.isEmpty = (obj: any): boolean => {
-    return _JM.isEmpty(obj);
+    return jmUtils.isEmpty(obj);
 }
 
 exports.waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any> => {
-    return _JM.waitFor(conditionFunction, maxRetryCount, tryInterval);
+    return jmUtils.waitFor(conditionFunction, maxRetryCount, tryInterval);
 }

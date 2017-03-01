@@ -2,46 +2,50 @@
 var isNode = typeof window === 'undefined';
 var _ = isNode ? require("lodash") : window._;
 var q = isNode ? require("q") : window.Q;
-class _JM {
-}
-_JM.isDefined = (obj) => {
-    return (obj != null && obj != undefined);
-};
-_JM.isEmpty = (obj) => {
-    return !_JM.isDefined(obj) || _.isEmpty(obj);
-};
-_JM.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
-    if (!_JM.isDefined(maxRetryCount)) {
-        maxRetryCount = 5;
+var _JM = (function () {
+    function _JM() {
     }
-    if (!_JM.isDefined(tryInterval)) {
-        tryInterval = 200;
-    }
-    var deferred = q.defer();
-    var retryCount = 0;
-    var retry = function () {
-        if (conditionFunction()) {
-            deferred.resolve();
+    _JM.isDefined = function (obj) {
+        return (obj != null && obj != undefined);
+    };
+    _JM.isEmpty = function (obj) {
+        return !_JM.isDefined(obj) || _.isEmpty(obj);
+    };
+    _JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
+        if (!_JM.isDefined(maxRetryCount)) {
+            maxRetryCount = 5;
         }
-        else {
-            retryCount++;
-            if (retryCount < maxRetryCount) {
-                setTimeout(function () {
-                    retry();
-                }, tryInterval);
+        if (!_JM.isDefined(tryInterval)) {
+            tryInterval = 200;
+        }
+        var deferred = q.defer();
+        var retryCount = 0;
+        var retry = function () {
+            if (conditionFunction()) {
+                deferred.resolve();
             }
             else {
-                deferred.reject(undefined);
+                retryCount++;
+                if (retryCount < maxRetryCount) {
+                    setTimeout(function () {
+                        retry();
+                    }, tryInterval);
+                }
+                else {
+                    deferred.reject(undefined);
+                }
             }
-        }
+        };
+        retry();
+        return deferred.promise;
     };
-    retry();
-    return deferred.promise;
-};
+    return _JM;
+})();
+exports._JM = _JM;
 ;
 if (isNode) {
-    module.exports.JM = _JM;
     module.exports = _JM;
+    module.exports.JM = _JM;
 }
 else {
     window.JM = _JM;

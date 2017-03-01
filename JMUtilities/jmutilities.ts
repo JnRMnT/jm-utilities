@@ -3,7 +3,7 @@ var isNode = typeof window === 'undefined';
 var _: _.LoDashStatic = isNode ? require("lodash") : (<any>window)._;
 var q = isNode ? require("q") : (<any>window).Q;
 
-class _JM {
+export class _JM {
     public static isDefined = (obj: any): boolean=> {
         return (obj != null && obj != undefined);
     };
@@ -41,8 +41,8 @@ class _JM {
 };
 
 if (isNode) {
-    module.exports.JM = _JM;
     module.exports = _JM;
+    module.exports.JM = _JM;
 } else {
     (<any>window).JM = _JM;
 }

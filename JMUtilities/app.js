@@ -1,12 +1,12 @@
 /// <reference path="Scripts/typings/index.d.ts" />
-require("./jmutilities.js");
-exports.isDefined = (obj) => {
-    return _JM.isDefined(obj);
+var jmUtils = require("./jmutilities.js");
+exports.isDefined = function (obj) {
+    return jmUtils.isDefined(obj);
 };
-exports.isEmpty = (obj) => {
-    return _JM.isEmpty(obj);
+exports.isEmpty = function (obj) {
+    return jmUtils.isEmpty(obj);
 };
-exports.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
-    return _JM.waitFor(conditionFunction, maxRetryCount, tryInterval);
+exports.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
+    return jmUtils.waitFor(conditionFunction, maxRetryCount, tryInterval);
 };
 //# sourceMappingURL=app.js.map
