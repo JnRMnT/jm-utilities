@@ -30,7 +30,4 @@ exports.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
 exports.isNode = () => {
     return jmUtils.isNode();
 };
-exports.resolveModule = (moduleName, windowName) => {
-    return jmUtils.resolveModule(moduleName, windowName);
-};
 //# sourceMappingURL=app.js.map

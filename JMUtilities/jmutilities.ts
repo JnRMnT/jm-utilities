@@ -34,24 +34,30 @@ export class _JM {
         retry();
         return deferred.promise;
     };
-
-    public static resolveModule(moduleName: string, windowName?: string): any {
-        if (require) {
-            return require(moduleName);
-        } else if (window) {
-            return (<any>window).windowName;
-        } else {
-            throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.")
-        }
-    }
-
+    
     public static isNode(): boolean {
         return typeof window === 'undefined';
     }
 };
 
-var _: _.LoDashStatic = _JM.resolveModule("lodash", "_");
-var q = _JM.resolveModule("q", "Q");
+/*-----Seperate functions used to enable WebPack module require support-----*/
+function resolveQ() {
+    if (require) {
+        return require("q");
+    } else if (window) {
+        return (<any>window).Q;
+    }
+}
+function resolveLodash() {
+    if (require) {
+        return require("lodash");
+    } else if (window) {
+        return (<any>window)._;
+    }
+}
+/*--------------------------------------------------------------------------*/
+var _: _.LoDashStatic = resolveLodash();
+var q = resolveQ();
 if (_JM.isNode()) {
     module.exports = _JM;
     module.exports.JM = _JM;

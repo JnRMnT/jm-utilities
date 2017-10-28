@@ -29,7 +29,3 @@ exports.waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInter
 exports.isNode = (): boolean => {
     return jmUtils.isNode();
 }
-
-exports.resolveModule = (moduleName: string, windowName?: string): any => {
-    return jmUtils.resolveModule(moduleName, windowName);
-}

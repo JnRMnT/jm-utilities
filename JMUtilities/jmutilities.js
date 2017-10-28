@@ -2,17 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="Scripts/typings/index.d.ts" />
 class _JM {
-    static resolveModule(moduleName, windowName) {
-        if (require) {
-            return require(moduleName);
-        }
-        else if (window) {
-            return window.windowName;
-        }
-        else {
-            throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.");
-        }
-    }
     static isNode() {
         return typeof window === 'undefined';
     }
@@ -53,8 +42,26 @@ _JM.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
 };
 exports._JM = _JM;
 ;
-var _ = _JM.resolveModule("lodash", "_");
-var q = _JM.resolveModule("q", "Q");
+/*-----Seperate functions used to enable WebPack module require support-----*/
+function resolveQ() {
+    if (require) {
+        return require("q");
+    }
+    else if (window) {
+        return window.Q;
+    }
+}
+function resolveLodash() {
+    if (require) {
+        return require("lodash");
+    }
+    else if (window) {
+        return window._;
+    }
+}
+/*--------------------------------------------------------------------------*/
+var _ = resolveLodash();
+var q = resolveQ();
 if (_JM.isNode()) {
     module.exports = _JM;
     module.exports.JM = _JM;
