@@ -15,7 +15,7 @@ exports.isDefined = (obj: any): boolean => {
 
 exports.isEmpty = (obj: any): boolean => {
     return jmUtils.isEmpty(obj);
-}
+}  
 
 exports.waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any> => {
     return jmUtils.waitFor(conditionFunction, maxRetryCount, tryInterval);
@@ -24,7 +24,7 @@ exports.waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInter
 exports.isNode = (): boolean => {
     return jmUtils.isNode();
 }
-
-exports.resolveModule = (moduleName: string, windowName?: string): any => {
+ 
+exports.resolveModule = (moduleName: string, windowName?: string): any => { 
     return jmUtils.resolveModule(moduleName, windowName);
 }

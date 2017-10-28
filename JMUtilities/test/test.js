@@ -1,7 +1,9 @@
-var assert = require('assert');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const assert = require("assert");
 var jmUtils = require("../app");
-describe("Main Tests", function () {
-    it("Is Defined Test", function () {
+describe("Main Tests", () => {
+    it("Is Defined Test", () => {
         var newObject;
         assert.ok(!jmUtils.isDefined(newObject), "Uninitialized object");
         newObject = {};

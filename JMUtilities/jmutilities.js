@@ -1,49 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="Scripts/typings/index.d.ts" />
-var isNode = typeof window === 'undefined';
-var _ = isNode ? require("lodash") : window._;
-var q = isNode ? require("q") : window.Q;
-var _JM = (function () {
-    function _JM() {
+class _JM {
+    static resolveModule(moduleName, windowName) {
+        if (require) {
+            return require("./jmutilities.js");
+        }
+        else if (window) {
+            return window.moduleName;
+        }
+        else {
+            throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.");
+        }
     }
-    _JM.isDefined = function (obj) {
-        return (obj != null && obj != undefined);
-    };
-    _JM.isEmpty = function (obj) {
-        return !_JM.isDefined(obj) || _.isEmpty(obj);
-    };
-    _JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
-        if (!_JM.isDefined(maxRetryCount)) {
-            maxRetryCount = 5;
+    static isNode() {
+        return typeof window === 'undefined';
+    }
+}
+_JM.isDefined = (obj) => {
+    return (obj != null && obj != undefined);
+};
+_JM.isEmpty = (obj) => {
+    return !_JM.isDefined(obj) || _.isEmpty(obj);
+};
+_JM.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
+    if (!_JM.isDefined(maxRetryCount)) {
+        maxRetryCount = 5;
+    }
+    if (!_JM.isDefined(tryInterval)) {
+        tryInterval = 200;
+    }
+    var deferred = q.defer();
+    var retryCount = 0;
+    var retry = function () {
+        if (conditionFunction()) {
+            deferred.resolve();
         }
-        if (!_JM.isDefined(tryInterval)) {
-            tryInterval = 200;
-        }
-        var deferred = q.defer();
-        var retryCount = 0;
-        var retry = function () {
-            if (conditionFunction()) {
-                deferred.resolve();
+        else {
+            retryCount++;
+            if (retryCount < maxRetryCount) {
+                setTimeout(function () {
+                    retry();
+                }, tryInterval);
             }
             else {
-                retryCount++;
-                if (retryCount < maxRetryCount) {
-                    setTimeout(function () {
-                        retry();
-                    }, tryInterval);
-                }
-                else {
-                    deferred.reject(undefined);
-                }
+                deferred.reject(undefined);
             }
-        };
-        retry();
-        return deferred.promise;
+        }
     };
-    return _JM;
-})();
+    retry();
+    return deferred.promise;
+};
 exports._JM = _JM;
 ;
-if (isNode) {
+var _ = _JM.resolveModule("lodash", "_");
+var q = _JM.resolveModule("q", "Q");
+if (_JM.isNode()) {
     module.exports = _JM;
     module.exports.JM = _JM;
 }
