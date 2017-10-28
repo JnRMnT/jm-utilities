@@ -1,17 +1,23 @@
 /// <reference path="Scripts/typings/index.d.ts" />
-function resolveModule(moduleName, windowName) {
+function resolveModule() {
     if (require) {
-        return require("./jmutilities.js");
+        var jmUtilities = require("./jmutilities.js");
+        if (jmUtilities._JM) {
+            return jmUtilities._JM;
+        }
+        else {
+            return jmUtilities;
+        }
     }
     else if (window) {
-        window.windowName;
+        window.JM;
     }
     else {
         throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.");
     }
 }
 ;
-var jmUtils = resolveModule("./jmutilities.js");
+var jmUtils = resolveModule();
 exports.isDefined = (obj) => {
     return jmUtils.isDefined(obj);
 };
