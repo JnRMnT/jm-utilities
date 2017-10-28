@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class _JM {
     static resolveModule(moduleName, windowName) {
         if (require) {
-            return require("./jmutilities.js");
+            return require(moduleName);
         }
         else if (window) {
-            return window.moduleName;
+            return window.windowName;
         }
         else {
             throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.");

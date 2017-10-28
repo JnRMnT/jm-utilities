@@ -37,9 +37,9 @@ export class _JM {
 
     public static resolveModule(moduleName: string, windowName?: string): any {
         if (require) {
-            return require("./jmutilities.js");
+            return require(moduleName);
         } else if (window) {
-            return (<any>window).moduleName;
+            return (<any>window).windowName;
         } else {
             throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.")
         }
