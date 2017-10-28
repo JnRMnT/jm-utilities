@@ -1,17 +1,13 @@
 ﻿/// <reference path="Scripts/typings/index.d.ts" />
-var isNode = typeof window === 'undefined';
-var _: _.LoDashStatic = isNode ? require("lodash") : (<any>window)._;
-var q = isNode ? require("q") : (<any>window).Q;
-
 export class _JM {
-    public static isDefined = (obj: any): boolean=> {
+    public static isDefined = (obj: any): boolean => {
         return (obj != null && obj != undefined);
     };
-    public static isEmpty = (obj: any): boolean=> {
+    public static isEmpty = (obj: any): boolean => {
         return !_JM.isDefined(obj) || _.isEmpty(obj);
     };
 
-    public static waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any>=> {
+    public static waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any> => {
         if (!_JM.isDefined(maxRetryCount)) {
             maxRetryCount = 5;
         }
@@ -38,9 +34,25 @@ export class _JM {
         retry();
         return deferred.promise;
     };
+
+    public static resolveModule(moduleName: string, windowName?: string): any {
+        if (require) {
+            return require("./jmutilities.js");
+        } else if (window) {
+            return (<any>window).moduleName;
+        } else {
+            throw new Error("You must use JM Utilities on Node modules or have necessary module dependencies on your window.")
+        }
+    }
+
+    public static isNode(): boolean {
+        return typeof window === 'undefined';
+    }
 };
 
-if (isNode) {
+var _: _.LoDashStatic = _JM.resolveModule("lodash", "_");
+var q = _JM.resolveModule("q", "Q");
+if (_JM.isNode()) {
     module.exports = _JM;
     module.exports.JM = _JM;
 } else {
