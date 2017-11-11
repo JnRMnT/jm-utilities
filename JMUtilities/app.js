@@ -18,16 +18,16 @@ function resolveModule() {
 }
 ;
 var jmUtils = resolveModule();
-exports.isDefined = (obj) => {
+exports.isDefined = function (obj) {
     return jmUtils.isDefined(obj);
 };
-exports.isEmpty = (obj) => {
+exports.isEmpty = function (obj) {
     return jmUtils.isEmpty(obj);
 };
-exports.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
+exports.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
     return jmUtils.waitFor(conditionFunction, maxRetryCount, tryInterval);
 };
-exports.isNode = () => {
+exports.isNode = function () {
     return jmUtils.isNode();
 };
 //# sourceMappingURL=app.js.map

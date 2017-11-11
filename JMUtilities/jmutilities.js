@@ -1,18 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="Scripts/typings/index.d.ts" />
-class _JM {
-    static isNode() {
-        return typeof window === 'undefined';
+var _JM = (function () {
+    function _JM() {
     }
-}
-_JM.isDefined = (obj) => {
+    _JM.isNode = function () {
+        return typeof window === 'undefined';
+    };
+    return _JM;
+}());
+_JM.isDefined = function (obj) {
     return (obj != null && obj != undefined);
 };
-_JM.isEmpty = (obj) => {
+_JM.isEmpty = function (obj) {
     return !_JM.isDefined(obj) || _.isEmpty(obj);
 };
-_JM.waitFor = (conditionFunction, maxRetryCount, tryInterval) => {
+_JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
     if (!_JM.isDefined(maxRetryCount)) {
         maxRetryCount = 5;
     }
