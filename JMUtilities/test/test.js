@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
-var jmUtils = require("../app");
+var jmutilities_1 = require("../jmutilities");
 describe("Main Tests", function () {
     it("Is Defined Test", function () {
         var newObject;
-        assert.ok(!jmUtils.isDefined(newObject), "Uninitialized object");
+        assert.ok(!jmutilities_1.JM.isDefined(newObject), "Uninitialized object");
         newObject = {};
-        assert.ok(jmUtils.isDefined(newObject), "Initialized object");
+        assert.ok(jmutilities_1.JM.isDefined(newObject), "Initialized object");
         newObject = undefined;
-        assert.ok(!jmUtils.isDefined(newObject), "Explicitly undefined object");
+        assert.ok(!jmutilities_1.JM.isDefined(newObject), "Explicitly undefined object");
     });
 });
 //# sourceMappingURL=test.js.map

@@ -1,17 +1,18 @@
-﻿/// <reference path="Scripts/typings/index.d.ts" />
-export class _JM {
+﻿import { LoDashStatic } from 'lodash';
+
+export class JM {
     public static isDefined = (obj: any): boolean => {
         return (obj != null && obj != undefined);
     };
     public static isEmpty = (obj: any): boolean => {
-        return !_JM.isDefined(obj) || _.isEmpty(obj);
+        return !JM.isDefined(obj) || _.isEmpty(obj);
     };
 
     public static waitFor = (conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Q.IPromise<any> => {
-        if (!_JM.isDefined(maxRetryCount)) {
+        if (!JM.isDefined(maxRetryCount)) {
             maxRetryCount = 5;
         }
-        if (!_JM.isDefined(tryInterval)) {
+        if (!JM.isDefined(tryInterval)) {
             tryInterval = 200;
         }
         var deferred: Q.Deferred<any> = q.defer();
@@ -34,7 +35,7 @@ export class _JM {
         retry();
         return deferred.promise;
     };
-    
+
     public static isNode(): boolean {
         return typeof window === 'undefined';
     }
@@ -56,11 +57,10 @@ function resolveLodash() {
     }
 }
 /*--------------------------------------------------------------------------*/
-var _: _.LoDashStatic = resolveLodash();
+var _: LoDashStatic = resolveLodash();
 var q = resolveQ();
-if (_JM.isNode()) {
-    module.exports = _JM;
-    module.exports.JM = _JM;
+if (JM.isNode()) {
+    module.exports = JM;
 } else {
-    (<any>window).JM = _JM;
+    (<any>window).JM = JM;
 }

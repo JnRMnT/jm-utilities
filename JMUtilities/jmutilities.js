@@ -1,49 +1,48 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/// <reference path="Scripts/typings/index.d.ts" />
-var _JM = (function () {
-    function _JM() {
+var JM = /** @class */ (function () {
+    function JM() {
     }
-    _JM.isNode = function () {
+    JM.isNode = function () {
         return typeof window === 'undefined';
     };
-    return _JM;
-}());
-_JM.isDefined = function (obj) {
-    return (obj != null && obj != undefined);
-};
-_JM.isEmpty = function (obj) {
-    return !_JM.isDefined(obj) || _.isEmpty(obj);
-};
-_JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
-    if (!_JM.isDefined(maxRetryCount)) {
-        maxRetryCount = 5;
-    }
-    if (!_JM.isDefined(tryInterval)) {
-        tryInterval = 200;
-    }
-    var deferred = q.defer();
-    var retryCount = 0;
-    var retry = function () {
-        if (conditionFunction()) {
-            deferred.resolve();
+    JM.isDefined = function (obj) {
+        return (obj != null && obj != undefined);
+    };
+    JM.isEmpty = function (obj) {
+        return !JM.isDefined(obj) || _.isEmpty(obj);
+    };
+    JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
+        if (!JM.isDefined(maxRetryCount)) {
+            maxRetryCount = 5;
         }
-        else {
-            retryCount++;
-            if (retryCount < maxRetryCount) {
-                setTimeout(function () {
-                    retry();
-                }, tryInterval);
+        if (!JM.isDefined(tryInterval)) {
+            tryInterval = 200;
+        }
+        var deferred = q.defer();
+        var retryCount = 0;
+        var retry = function () {
+            if (conditionFunction()) {
+                deferred.resolve();
             }
             else {
-                deferred.reject(undefined);
+                retryCount++;
+                if (retryCount < maxRetryCount) {
+                    setTimeout(function () {
+                        retry();
+                    }, tryInterval);
+                }
+                else {
+                    deferred.reject(undefined);
+                }
             }
-        }
+        };
+        retry();
+        return deferred.promise;
     };
-    retry();
-    return deferred.promise;
-};
-exports._JM = _JM;
+    return JM;
+}());
+exports.JM = JM;
 ;
 /*-----Seperate functions used to enable WebPack module require support-----*/
 function resolveQ() {
@@ -65,11 +64,10 @@ function resolveLodash() {
 /*--------------------------------------------------------------------------*/
 var _ = resolveLodash();
 var q = resolveQ();
-if (_JM.isNode()) {
-    module.exports = _JM;
-    module.exports.JM = _JM;
+if (JM.isNode()) {
+    module.exports = JM;
 }
 else {
-    window.JM = _JM;
+    window.JM = JM;
 }
 //# sourceMappingURL=jmutilities.js.map
