@@ -1,6 +1,6 @@
 {
   "name": "jm-utilities",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "JMUtilities",
   "main": "jmutilities.js",
   "author": {
@@ -11,7 +11,11 @@
     "type": "git",
     "url": "https://github.com/JnRMnT/jm-utilities.git"
   },
-  "files": [ "**/jmutilities.js", "**/jmutilities.ts", "**/node_modules/**/*" ],
+  "files": [
+    "**/jmutilities.js",
+    "**/jmutilities.ts",
+    "**/node_modules/**/*"
+  ],
   "scripts": {
     "test": "mocha"
   },
@@ -22,7 +26,7 @@
     "@types/q": "1.5.1"
   },
   "dependencies": {
-    "lodash": "^4.16.6",
+    "lodash": "^4.17.15",
     "q": "^1.4.1"
   }
 }
