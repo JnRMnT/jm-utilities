@@ -61,6 +61,7 @@ var _: LoDashStatic = resolveLodash();
 var q = resolveQ();
 if (JM.isNode()) {
     module.exports = JM;
+    module.exports.JM = JM;
 } else {
     (<any>window).JM = JM;
 }

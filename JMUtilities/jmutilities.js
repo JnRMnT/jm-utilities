@@ -66,6 +66,7 @@ var _ = resolveLodash();
 var q = resolveQ();
 if (JM.isNode()) {
     module.exports = JM;
+    module.exports.JM = JM;
 }
 else {
     window.JM = JM;
