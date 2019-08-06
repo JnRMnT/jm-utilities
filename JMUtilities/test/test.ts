@@ -10,4 +10,15 @@ describe("Main Tests", () => {
         newObject = undefined;
         assert.ok(!JM.isDefined(newObject), "Explicitly undefined object");
     });
+    it("Is Empty Test", () => {
+        assert.ok(JM.isEmpty(""), "Empty String");        
+        assert.ok(JM.isEmpty(null), "Null Value");
+        const undefinedObject = undefined;
+        assert.ok(JM.isEmpty(undefinedObject), "Undefined object");
+        assert.ok(JM.isEmpty([]), "Empty Array");
+
+        assert.ok(!JM.isEmpty([""]), "Valid List");
+        assert.ok(!JM.isEmpty({ "test": "test" }), "Valid Object");
+        assert.ok(!JM.isEmpty("test"), "Valid String");
+    });
 });
