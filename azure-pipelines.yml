@@ -26,6 +26,12 @@ steps:
     customCommand: 'test'
     workingDir: 'JMUtilities/'
   displayName: "Run Tests"
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'JMUtilities/'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/JMUtilities/'
+  displayName: "Copy Files to Artifacts Folder"
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
