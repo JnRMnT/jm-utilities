@@ -8,8 +8,19 @@ steps:
 - task: UseNode@1
   inputs:
     checkLatest: true
+  displayName: "Install NodeJs"
+- task: Npm@1
+  inputs:
+    command: 'install'
+  displayName: "Install Npm Packages"
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
     configuration: 'Release'
     clean: true
+  displayName: "Build Project"
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'test'
+  displayName: "Run Tests"
