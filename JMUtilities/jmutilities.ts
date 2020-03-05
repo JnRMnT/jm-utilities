@@ -1,5 +1,4 @@
-﻿/// <reference path="./node_modules/@types/node/index.d.ts" />
-import { LoDashStatic } from 'lodash';
+﻿import { LoDashStatic } from 'lodash';
 import * as Q from "q";
 
 export class JM {
