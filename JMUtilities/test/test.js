@@ -1,25 +1,39 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var assert = require("assert");
-var jmutilities_1 = require("../jmutilities");
+import { assert } from "chai";
+import { describe, it } from "mocha";
+import { JM } from '../jmutilities.js';
 describe("Main Tests", function () {
     it("Is Defined Test", function () {
         var newObject;
-        assert.ok(!jmutilities_1.JM.isDefined(newObject), "Uninitialized object");
+        assert.ok(!JM.isDefined(newObject), "Uninitialized object");
         newObject = {};
-        assert.ok(jmutilities_1.JM.isDefined(newObject), "Initialized object");
+        assert.ok(JM.isDefined(newObject), "Initialized object");
         newObject = undefined;
-        assert.ok(!jmutilities_1.JM.isDefined(newObject), "Explicitly undefined object");
+        assert.ok(!JM.isDefined(newObject), "Explicitly undefined object");
     });
     it("Is Empty Test", function () {
-        assert.ok(jmutilities_1.JM.isEmpty(""), "Empty String");
-        assert.ok(jmutilities_1.JM.isEmpty(null), "Null Value");
+        assert.ok(JM.isEmpty(""), "Empty String");
+        assert.ok(JM.isEmpty(null), "Null Value");
         var undefinedObject = undefined;
-        assert.ok(jmutilities_1.JM.isEmpty(undefinedObject), "Undefined object");
-        assert.ok(jmutilities_1.JM.isEmpty([]), "Empty Array");
-        assert.ok(!jmutilities_1.JM.isEmpty([""]), "Valid List");
-        assert.ok(!jmutilities_1.JM.isEmpty({ "test": "test" }), "Valid Object");
-        assert.ok(!jmutilities_1.JM.isEmpty("test"), "Valid String");
+        assert.ok(JM.isEmpty(undefinedObject), "Undefined object");
+        assert.ok(JM.isEmpty([]), "Empty Array");
+        assert.ok(!JM.isEmpty([""]), "Valid List");
+        assert.ok(!JM.isEmpty({ "test": "test" }), "Valid Object");
+        assert.ok(!JM.isEmpty("test"), "Valid String");
+    });
+    it("Wait For Test", function () {
+        return new Promise(function (resolve, reject) {
+            var testVariable = false;
+            JM.waitFor(function () {
+                return testVariable;
+            }).then(function () {
+                resolve();
+            }, function () {
+                reject("Wait got rejected");
+            });
+            setTimeout(function () {
+                testVariable = true;
+            }, 500);
+        });
     });
 });
 //# sourceMappingURL=test.js.map

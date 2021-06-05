@@ -1,33 +1,29 @@
 {
-  "name": "jm-utilities",
-  "version": "1.1.8",
-  "description": "JMUtilities",
-  "main": "jmutilities.js",
-  "author": {
-    "name": "JnRMnT",
-    "email": "ozankanik@hotmail.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/JnRMnT/jm-utilities.git"
-  },
-  "files": [
-    "**/jmutilities.js",
-    "**/jmutilities.ts",
-    "**/node_modules/**/*"
-  ],
-  "scripts": {
-    "test": "mocha"
-  },
-  "devDependencies": {
-    "@types/lodash": "4.14.118",
-    "@types/mocha": "5.2.5",
-    "@types/node": "10.12.11",
-    "@types/q": "1.5.1",
-    "mocha": "^6.2.2"
-  },
-  "dependencies": {
-    "lodash": "^4.17.15",
-    "q": "^1.4.1"
-  }
+    "name": "jm-utilities",
+    "version": "1.2.0",
+    "description": "JMUtilities",
+    "main": "jmutilities.js",
+    "type": "module",
+    "author": {
+        "name": "JnRMnT",
+        "email": "ozankanik@hotmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JnRMnT/jm-utilities.git"
+    },
+    "files": [
+        "**/jmutilities.js",
+        "**/jmutilities.ts"
+    ],
+    "scripts": {
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.2.18",
+        "@types/mocha": "8.2.2",
+        "chai": "^4.3.4",
+        "mocha": "8.4.0"
+    },
+    "dependencies": {}
 }

@@ -1,74 +1,61 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var JM = /** @class */ (function () {
-    function JM() {
-    }
-    JM.isNode = function () {
-        return typeof window === 'undefined';
-    };
-    JM.isDefined = function (obj) {
+export var JM;
+(function (JM) {
+    function isDefined(obj) {
         return (obj != null && obj != undefined);
-    };
-    JM.isEmpty = function (obj) {
-        return !JM.isDefined(obj) || _.isEmpty(obj);
-    };
-    JM.waitFor = function (conditionFunction, maxRetryCount, tryInterval) {
-        if (!JM.isDefined(maxRetryCount)) {
-            maxRetryCount = 5;
-        }
-        if (!JM.isDefined(tryInterval)) {
-            tryInterval = 200;
-        }
-        var deferred = q.defer();
-        var retryCount = 0;
-        var retry = function () {
-            if (conditionFunction()) {
-                deferred.resolve();
+    }
+    JM.isDefined = isDefined;
+    ;
+    function isEmpty(obj) {
+        if (JM.isDefined(obj)) {
+            if (typeof obj === "string") {
+                var objString = obj;
+                return objString.length == 0;
+            }
+            else if (Array.isArray(obj)) {
+                return obj.length == 0;
             }
             else {
-                retryCount++;
-                if (retryCount < maxRetryCount) {
-                    setTimeout(function () {
-                        retry();
-                    }, tryInterval);
+                //check only desired empty checks, else return false
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+    JM.isEmpty = isEmpty;
+    ;
+    function waitFor(conditionFunction, maxRetryCount, tryInterval) {
+        var waitPromise = new Promise(function (resolve, reject) {
+            if (!JM.isDefined(maxRetryCount)) {
+                maxRetryCount = 5;
+            }
+            if (!JM.isDefined(tryInterval)) {
+                tryInterval = 200;
+            }
+            var retryCount = 0;
+            var retry = function () {
+                if (conditionFunction()) {
+                    resolve();
                 }
                 else {
-                    deferred.reject(undefined);
+                    retryCount++;
+                    if (retryCount < maxRetryCount) {
+                        setTimeout(function () {
+                            retry();
+                        }, tryInterval);
+                    }
+                    else {
+                        reject();
+                    }
                 }
-            }
-        };
-        retry();
-        return deferred.promise;
-    };
-    return JM;
-}());
-exports.JM = JM;
+            };
+            retry();
+        });
+        return waitPromise;
+    }
+    JM.waitFor = waitFor;
+    ;
+})(JM || (JM = {}));
 ;
-/*-----Seperate functions used to enable WebPack module require support-----*/
-function resolveQ() {
-    if (require) {
-        return require("q");
-    }
-    else if (window) {
-        return window.Q;
-    }
-}
-function resolveLodash() {
-    if (require) {
-        return require("lodash");
-    }
-    else if (window) {
-        return window._;
-    }
-}
-/*--------------------------------------------------------------------------*/
-var _ = resolveLodash();
-var q = resolveQ();
-if (JM.isNode()) {
-    module.exports = JM;
-    module.exports.JM = JM;
-}
-else {
-    window.JM = JM;
-}
 //# sourceMappingURL=jmutilities.js.map

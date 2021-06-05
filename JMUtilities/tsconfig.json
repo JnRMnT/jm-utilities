@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "ES2015",
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "ES5",
+    "moduleResolution": "Node",
+    "lib": [
+        "ES2015",
+        "DOM"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
