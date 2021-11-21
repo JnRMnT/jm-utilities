@@ -20,7 +20,7 @@
         }
     };
 
-    export function waitFor(conditionFunction: Function, maxRetryCount?: number, tryInterval?: number): Promise<void> {
+    export function waitFor(conditionFunction: Function, maxRetryCount?: number | undefined, tryInterval?: number | undefined): Promise<void> {
         const waitPromise = new Promise<void>((resolve, reject) => {
             if (!JM.isDefined(maxRetryCount)) {
                 maxRetryCount = 5;
@@ -34,7 +34,7 @@
                     resolve();
                 } else {
                     retryCount++;
-                    if (retryCount < maxRetryCount) {
+                    if (retryCount < (maxRetryCount as number)) {
                         setTimeout(function () {
                             retry();
                         }, tryInterval);
